@@ -11,7 +11,8 @@ abstract class Tokenizer
   end
 
   # abstract tokenizer
-  def self.new(indicator = nil, minimum_size = 1, maximum_size = Int32::MAX, &callback)
+  def self.new(&callback : IO::Memory -> Int32)
+    Tokenizer::Abstract.new(&callback)
   end
 
   getter buffer
