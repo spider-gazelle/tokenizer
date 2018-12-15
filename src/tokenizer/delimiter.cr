@@ -24,8 +24,11 @@ class Tokenizer::Delimiter < Tokenizer
     last_found = 0
     messages = [] of Bytes
     remaining = @buffer.size - @buffer.pos
+
     while remaining >= @delimiter.size
       @buffer.read @compare_d
+
+      # Check to see if we've found the delimiter
       if @compare_d == @delimiter
         slice = Bytes.new(@buffer.pos - last_found)
         @buffer.pos = last_found
@@ -33,6 +36,7 @@ class Tokenizer::Delimiter < Tokenizer
         messages << slice
         last_found = @buffer.pos
       else
+        # move the buffer forward by 1 byte
         @buffer.pos = @buffer.pos - @delimiter.size + 1
       end
       remaining = @buffer.size - @buffer.pos
