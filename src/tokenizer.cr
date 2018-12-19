@@ -28,6 +28,7 @@ abstract class Tokenizer
     @buffer.read slice
     @buffer.clear
     @buffer.write slice
+    @buffer.rewind
   end
 end
 

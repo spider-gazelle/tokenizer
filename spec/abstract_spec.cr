@@ -4,8 +4,7 @@ require "../src/tokenizer"
 describe Tokenizer do
   describe Tokenizer::Abstract do
     it "should extract a message" do
-      # NOTE:: seems weird that 'a' + 1 doesn't raise an error...
-      msg1 = "3abcaa"
+      msg1 = "3abc"
       buffer = Tokenizer.new do |io|
         # Use #peek to get a slice of this memory
         str = io.gets_to_end
@@ -14,7 +13,7 @@ describe Tokenizer do
       result = buffer.extract(msg1)
       result.map { |bytes| String.new(bytes) }.should eq(["3abc"])
 
-      buffer.buffer.size.should eq(2)
+      buffer.buffer.size.should eq(0)
     end
 
     it "should handle cases where the message is larger than the buffer" do
@@ -35,6 +34,20 @@ describe Tokenizer do
       result.map { |bytes| String.new(bytes) }.should eq(["2eh"])
 
       buffer.buffer.size.should eq(0)
+    end
+
+    it "should extract multiple messages" do
+      # NOTE:: seems weird that 'a' + 1 doesn't raise an error...
+      msg1 = "3abc4aaaa5t"
+      buffer = Tokenizer.new do |io|
+        # Use #peek to get a slice of this memory
+        str = io.gets_to_end
+        str[0].to_i + 1
+      end
+      result = buffer.extract(msg1)
+      result.map { |bytes| String.new(bytes) }.should eq(["3abc", "4aaaa"])
+
+      buffer.buffer.size.should eq(2)
     end
   end
 end

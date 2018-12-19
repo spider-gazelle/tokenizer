@@ -19,5 +19,12 @@ describe Tokenizer do
       result.map { |bytes| String.new(bytes) }.should eq(["456GO", "789GO"])
       buffer.buffer.size.should eq(2)
     end
+
+    it "should extract multiple messages" do
+      msg1 = "123GO45GO"
+      buffer = Tokenizer.new("GO")
+      result = buffer.extract(msg1)
+      result.map { |bytes| String.new(bytes) }.should eq(["123GO", "45GO"])
+    end
   end
 end
