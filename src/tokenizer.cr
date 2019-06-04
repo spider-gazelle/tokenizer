@@ -1,4 +1,6 @@
 abstract class Tokenizer
+  @buffer = IO::Memory.new
+
   # simple tokenizer
   def self.new(delimiter)
     Tokenizer::Delimiter.new(delimiter)

@@ -1,6 +1,5 @@
 class Tokenizer::Abstract < Tokenizer
   def initialize(&@callback : IO::Memory -> Int32)
-    @buffer = IO::Memory.new
   end
 
   property callback

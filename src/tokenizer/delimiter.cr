@@ -2,7 +2,6 @@ class Tokenizer::Delimiter < Tokenizer
   @delimiter : Bytes
 
   def initialize(delimiter)
-    @buffer = IO::Memory.new
     @delimiter = delimiter.to_slice
     @compare_d = Bytes.new(@delimiter.size)
     @checked = 0

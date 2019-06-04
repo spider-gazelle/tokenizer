@@ -3,7 +3,6 @@ class Tokenizer::Length < Tokenizer
   @compare_i : Bytes?
 
   def initialize(@token_size : Int32)
-    @buffer = IO::Memory.new
   end
 
   getter indicator
