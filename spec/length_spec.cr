@@ -24,6 +24,13 @@ describe Tokenizer do
       result.map { |bytes| String.new(bytes) }.should eq(["GO1234"])
     end
 
+    it "should tokenize length only messages where the data is a complete message" do
+      msg1 = "GO1234123456"
+      buffer = Tokenizer.new(6)
+      result = buffer.extract(msg1)
+      result.map { |bytes| String.new(bytes) }.should eq(["GO1234", "123456"])
+    end
+
     it "should discard data that is not relevant" do
       msg1 = "1234-GO1234"
       buffer = Tokenizer.new(6, "GO")
