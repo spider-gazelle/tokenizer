@@ -1,6 +1,6 @@
 # Crystal Lang Tokenizer
 
-[![Build Status](https://travis-ci.org/spider-gazelle/tokenizer.svg?branch=master)](https://travis-ci.org/spider-gazelle/tokenizer)
+[![CI](https://github.com/spider-gazelle/tokenizer/actions/workflows/ci.yml/badge.svg)](https://github.com/spider-gazelle/tokenizer/actions/workflows/ci.yml)
 
 A tool for buffering and tokenizing streaming inputs.
 
